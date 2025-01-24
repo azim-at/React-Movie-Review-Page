@@ -22,7 +22,6 @@ function Home() {
                 setLoading(false)
             }
         }
-
         loadPopularMovies()
     }, [])
 
@@ -34,8 +33,9 @@ function Home() {
         setLoading(true) 
         try {
             const searchResults = await searchMovies(searchQ)
-            searchMovies(searchResults)
+            setMovies(searchResults)
             setError(null)
+            console.log(searchMovies(searchResults))
         } catch (err) {
             console.log(err);
             setError("failed to search movie...")
@@ -49,7 +49,7 @@ function Home() {
     return (
         <div className="home">
             <form onSubmit={handleSearch} className="search-form">
-                <input type="text" placeholder="Search for movies..." className="search-input" value={searchQ} onChange={(e) => {
+                <input type="text" name="text" placeholder="Search for movies..." className="search-input" value={searchQ} onChange={(e) => {
                     setSearchQ(e.target.value)
                 }}/>
                 <button type="submit" className="search-button">Search</button>
